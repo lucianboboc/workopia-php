@@ -1,0 +1,16 @@
+{
+    "name": "lucianboboc/workopia",
+    "description": "Job Listing application",
+    "authors": [
+        {
+            "name": "Lucian Boboc",
+            "email": "info@lucianboboc.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    }
+}
