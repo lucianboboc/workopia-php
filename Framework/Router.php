@@ -79,6 +79,10 @@ class Router
     public function route($uri)
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
+        // Check for _method input
+        if ($requestMethod === 'POST' and isset($_POST['_method'])) {
+            $requestMethod = $_POST['_method'];
+        }
 
         foreach ($this->routes as $route) {
             // Split the current URI into segments
@@ -113,15 +117,6 @@ class Router
                     return;
                 }
             }
-
-//            if ($route['uri'] === $uri and $route['method'] === $requestMethod) {
-//                $controller = 'App\\Controllers\\' . $route['controller'];
-//                $controllerMethod = $route['controllerMethod'];
-//
-//                $controllerInstance = new $controller();
-//                $controllerInstance->$controllerMethod();
-//                return;
-//            }
         }
 
         ErrorController::notFound();
