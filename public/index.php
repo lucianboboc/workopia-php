@@ -2,6 +2,8 @@
 
 use Framework\Router;
 
+session_start();
+
 require __DIR__ . '/../vendor/autoload.php';
 require '../helpers.php';
 
@@ -16,3 +18,6 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 // Route the request
 $router->route($uri);
+
+session_destroy();
+$_SESSION = [];
