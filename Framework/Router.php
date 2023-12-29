@@ -74,7 +74,7 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri and $route['method'] === $method) {
-                require basePath($route['controller']);
+                require basePath('App/' . $route['controller']);
                 return;
             }
         }
@@ -89,7 +89,7 @@ class Router
     private function error($httpCode = 404)
     {
         http_response_code($httpCode);
-        require basePath("controllers/error/{$httpCode}.php");
+        require basePath("App/controllers/error/{$httpCode}.php");
         exit();
 
     }
