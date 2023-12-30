@@ -1,10 +1,12 @@
 <?php
 
-use Framework\Router;
-
-session_start();
-
 require __DIR__ . '/../vendor/autoload.php';
+
+use Framework\Router;
+use Framework\Session;
+
+Session::start();
+
 require '../helpers.php';
 
 // Instantiating the Router
@@ -18,6 +20,3 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 // Route the request
 $router->route($uri);
-
-session_destroy();
-$_SESSION = [];
