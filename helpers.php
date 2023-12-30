@@ -33,7 +33,7 @@ function loadView($name, $data = [])
  * @param string $name
  * @return void
  */
-function loadPartial($name)
+function loadPartial($name, $data = [])
 {
     $partialPath = basePath("App/views/partials/{$name}.php");
     if (!file_exists($partialPath)) {
@@ -41,6 +41,7 @@ function loadPartial($name)
         return;
     }
 
+    extract($data);
     require $partialPath;
 }
 
