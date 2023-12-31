@@ -162,6 +162,12 @@ class ListingController
             return;
         }
 
+        // Authorization
+        if (!Authorization::isOwner($listing['user_id'])) {
+            Session::setFlashMessage('error_message', 'You are not authorized to update this listing');
+            redirect('/listings/' . $listing['id']);
+        }
+
         loadView('listings/edit', [
             'listing' => $listing
         ]);
@@ -180,9 +186,16 @@ class ListingController
             'id' => $id
         ])->fetch();
 
+        // Check if listing exists
         if (!$listing) {
             ErrorController::notFound('Listing not found');
             return;
+        }
+
+        // Authorization
+        if (!Authorization::isOwner($listing['user_id'])) {
+            Session::setFlashMessage('error_message', 'You are not authorized to update this listing');
+            redirect('/listings/' . $listing['id']);
         }
 
         $allowedFields = [
